@@ -1,0 +1,17 @@
+- name: 拷贝server.xml配置文件
+  copy: src={{pro_name}}/server.xml dest={{pro_path}}/{{pro_name}}/conf/ owner=tomcat group=tomcat mode=755 backup=yes
+  tags:
+    - copy_server
+- name: 拷贝context.xml配置文件
+  copy: src={{pro_name}}/context.xml dest={{pro_path}}/{{pro_name}}/conf/ owner=tomcat group=tomcat mode=755 backup=yes
+  tags:
+    - copy_context
+- name: 拷贝catalina.sh配置文件
+  copy: src={{pro_name}}/catalina.sh dest={{pro_path}}/{{pro_name}}/bin/ owner=tomcat group=tomcat mode=755 backup=yes
+  tags:
+    - copy_catalina
+- name: 拷贝srv启动脚本
+  copy: src={{pro_name}}/{{pro_name}}.sh dest=/etc/init.d/{{pro_name}} owner=tomcat group=tomcat mode=755 backup=yes
+  tags:
+    - copy_srv
+

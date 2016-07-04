@@ -1,0 +1,9 @@
+---
+- name: 安装tomcat-native依赖包
+  yum: name={{item}} state=latest
+  with_items:
+    - apr-devel
+    - apr 
+    - apr-util 
+    - openssl-devel
+    - gcc*

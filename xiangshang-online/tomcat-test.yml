@@ -1,0 +1,29 @@
+---
+- hosts: "{{host}}"
+  gather_facts: False
+  #remote_user: admin
+  #sudo: yes
+  vars:
+    pro_name: "tomcat-test"
+    dirname: "test"
+    log_path: "/logs/test"
+  pre_tasks:
+    - name: 判断apr是否安装
+      stat: path=/usr/local/apr/
+      register: apr
+    - name: 判断jdk是否安装
+      stat: path=/usr/local/jdk1.7.0_79
+      register: jdk
+  roles:
+    - role: jdk_install
+      when: not jdk.stat.exists
+    - role: tomcat_native_install
+      when: not apr.stat.exists
+    - role: tomcat_install
+    - {role: edit_conf, tags: ["copy_server", "copy_context", "copy_catalina", "copy_srv"]}
+    #- role: zabbix_tomcat
+  post_tasks:
+    - name: 赋权tomcat权限
+      file: path=/opt/tomcat/{{pro_name}} recurse=yes owner=tomcat group=tomcat mode=755 state=directory
+    - name: 添加自启
+      shell: chkconfig --level 35 {{pro_name}} on

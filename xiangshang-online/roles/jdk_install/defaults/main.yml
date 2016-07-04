@@ -1,0 +1,5 @@
+# vars
+jdk_down_url: "http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.tar.gz"
+jdk_name: "jdk-7u79-linux-x64"
+pro_path: "/usr/local"
+soft_path: "/tmp"

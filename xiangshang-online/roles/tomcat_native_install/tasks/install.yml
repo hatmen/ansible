@@ -1,0 +1,9 @@
+- name: 拷贝tomcat-native
+  copy: src=tomcat-native-1.1.33-src.tar.gz dest=/xs/soft/tomcat-native-1.1.33-src.tar.gz
+- name: 解压tomcat-native-1.1.33-src.tar.gz
+  shell: tar zxf /xs/soft/tomcat-native-1.1.33-src.tar.gz -C /tmp/
+- name: 编译tomcat-native
+  shell: cd /tmp/tomcat-native-1.1.33-src/jni/native/
+         && ./configure --with-apr=/usr/bin/apr-1-config --with-ssl=yes --with-java-home=/xs/app/jdk1.7.0_79
+         && make && make install
+

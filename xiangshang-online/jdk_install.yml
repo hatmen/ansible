@@ -1,0 +1,7 @@
+---
+- hosts: "{{host}}"
+  remote_user: xsadmin
+  gather_facts: False
+  sudo: yes
+  roles:
+    - jdk_install

@@ -1,0 +1,13 @@
+---
+- hosts: "{{host}}"
+  remote_user: root
+  remote_user: xsadmin
+  sudo: yes
+  pre_tasks:
+    - name: 安装antive判断jdk是否安装
+      stat: path=/xs/app/jdk1.7.0_79
+      register: jdk
+  roles:
+    - role: jdk_install
+      when: not jdk.stat.exists
+    - role: tomcat_native_install
