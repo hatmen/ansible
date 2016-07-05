@@ -1,0 +1,2 @@
+- name: 拷贝jdk_conf.sh
+  template: src=jdk_conf.j2 dest={{soft_path}}/jdk_conf.sh owner=root group=root mode=0655

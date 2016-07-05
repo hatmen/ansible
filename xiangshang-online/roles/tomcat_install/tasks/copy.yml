@@ -1,0 +1,6 @@
+- name: 拷贝redis jar包至tomcat应用
+  copy: src={{item}} dest={{pro_path}}/{{pro_name}}/lib/
+  with_items:
+    - commons-pool2-2.3.jar
+    - jedis-2.5.2.jar
+    - tomcat-redis-session-manager1.2.jar

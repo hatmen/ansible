@@ -1,0 +1,21 @@
+#- name: 拷贝apache-tomcat-7.0.61
+#  copy: src=apache-tomcat-7.0.61.tar.gz dest={{soft_path}}/apache-tomcat-7.0.61.tar.gz
+- name: 下载{{tomcat_name}}
+  get_url:
+    url: {{tomcat_down_url}} 
+    dest: {{soft_path}}
+
+- name: 解压{{tomcat_name}}
+  shell: tar zxf {{soft_path}}/{{tomcat_name}}.tar.gz -C {{soft_path}}
+- name: 部署tomcat应用
+  shell: mv {{soft_path}}/{{tomcat_name}} {{pro_path}}/{{pro_name}}
+- name: 删除tomcat默认配置
+  shell: rm -rf {{pro_path}}/{{pro_name}}/webapps/*
+- name: 创建程序目录
+  file: path={{docbase}} state=directory owner=tomcat group=tomcat
+  when: docbase is defined
+- name: 创建程序默认目录
+  file: path=/xs/app/{{pro_name}}/webapps/{{dirname}} state=directory owner=tomcat group=tomcat
+  when: dirname is defined
+- name: 创建日志目录
+  file: path={{log_path}} state=directory owner=tomcat group=tomcat

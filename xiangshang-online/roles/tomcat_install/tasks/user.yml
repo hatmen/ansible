@@ -1,0 +1,10 @@
+- name: 判断tomcat用户是否存在
+  shell: id tomcat
+  register: result
+  ignore_errors: True
+- name: 创建tomcat组
+  group: name=tomcat state=present
+  when: result|failed
+- name: 创建tomcat用户
+  user: name=tomcat group=tomcat home=/home/tomcat shell=/bin/bash
+  when: result|failed

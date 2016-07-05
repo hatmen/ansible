@@ -1,0 +1,10 @@
+- name: 判断tomcat监控配置文件是否存在
+  stat: path=/etc/zabbix/zabbix_agentd.d/xs_tomcat_process_monitor.conf
+  register: zabbix_tomcat
+- name: 拷贝tomcat监控配置
+  copy: src=xs_tomcat_process_monitor.conf dest=/etc/zabbix/zabbix_agentd.d/ mode=0755 owner=zabbix group=zabbix
+  when: not zabbix_tomcat.stat.exists
+- name: 拷贝zabbix_template_api脚本
+  copy: src=zabbix_auto_templates.py dest={{soft_path}}/zabbix_auto_templates.py mode=0755
+- name: 关联相应模板
+  shell: python {{soft_path}}/zabbix_auto_templates.py link {{pro_name}}
