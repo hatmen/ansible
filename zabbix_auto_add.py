@@ -208,7 +208,7 @@ if __name__ == '__main__':
     zabbix_url="http://zabbix.xs.prd/api_jsonrpc.php"
     zabbix_header={"Content-Type":"application/json"}
     zabbix_user="admin"
-    zabbix_pass="C8df^3CMK"
+    zabbix_pass="xxxxxx"
     auth_code=""
     #temlate id list
     temlates = {'lvs':'10118',
