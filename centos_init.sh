@@ -19,7 +19,7 @@ fi
 #config dns
 
 cat <<EOF>/etc/resolv.conf 
-nameserver 10.30.0.51
+nameserver 10.10.0.51
 nameserver 114.114.114.114
 EOF
 
