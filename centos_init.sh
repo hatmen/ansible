@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MYHOME=`pwd`
-SOFT_URL='http://10.30.0.14'
+SOFT_URL='http://10.10.0.14'
 LOG_PATH='/root/initial.log'
 #取内网IP地址
 PRIVATEIP=`ifconfig|sed -n '2p'|awk '{print $2}'|awk -F: '{print $2}'`
@@ -158,8 +158,8 @@ fi
 
 ##xsadmin
 groupadd admin
-useradd -g admin xsadmin
-mkdir -p /home/xsadmin/.ssh && chmod 700 /home/xsadmin/.ssh && echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA4PQHKIGvVUv+chQ6tXKG7vYUNah1RLMRyZrnPHhOZg8Lao8NQBWJym//hWl+/olsHKbz7lRyVa8Qs8BpXQeOqQWlfoYSbSMr95YVUqLz+ESdNqYDD5w+tExeJgXWVfXeZNPfaJf+V1k2Bkj2oULPMvFAg14mHXTdrwyYzaJrur1V/ooCeKk3ePJP7fMXNM3Ya0eklBkEY0jyU8iFZaCSjvEtvuUZ9alRN41vxMj0Y69Zs3BWAEZha0zMuWEzXWAwvTlQ6b/XD9QbmtBl+ldYv6mzYch1QPRjbI2X4fxjg2fiecxK8jP+3gkVuMmZXVJgKjjBX3UoYgvWQEphYuMO+w== root@web">>/home/xsadmin/.ssh/authorized_keys && chmod 600 /home/xsadmin/.ssh/authorized_keys && chown -R xsadmin:admin /home/xsadmin/
+useradd -g admin admin
+mkdir -p /home/admin/.ssh && chmod 700 /home/admin/.ssh && echo "ssh-rsa Kbz7lRyVa8Qs8BpXQeOqQWlfoYSbSMr95YVUqLz+ESdNqYDD5w+tExeJgXWVfXeZNPfaJf+V1k2Bkj2oULPMvFAg14mHXTdrwyYzaJrur1V/ooCeKk3ePJP7fMXNM3Ya0eklBkEY0jyU8iFZaCSjvEtvuUZ9alRN41vxMj0Y69Zs3BWAEZha0zMuWEzXWAwvTlQ6b/XD9QbmtBl+ldYv6mzYch1QPRjbI2X4fxjg2fiecxK8jP+3gkVuMmZXVJgKjjBX3UoYgvWQEphYuMO+w== root@web">>/home/xsadmin/.ssh/authorized_keys && chmod 600 /home/xsadmin/.ssh/authorized_keys && chown -R admin:admin /home/admin/
 
 
 #2、配置sshd
@@ -184,7 +184,7 @@ sed -i 's/# %sys/ %sys/' /etc/sudoers
 cat <<EOF >> /etc/sudoers
 
 
-Defaults:xsadmin       !requiretty
+Defaults:admin       !requiretty
 %admin     ALL=(ALL)       NOPASSWD: ALL
 EOF
 
