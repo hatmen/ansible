@@ -1,0 +1,15 @@
+---
+- hosts: "{{host}}"
+  gather_facts: true
+
+  tasks:
+    - name: cpu core
+      shell: cat /proc/cpuinfo |grep "proc"|wc -l
+      register: cpu_core
+    - name: mem size
+      shell: cat /proc/meminfo |grep "MemTotal"|awk '{print $2}'
+      register: mem_size
+    - name: delegate_to
+      shell: echo "IP:" "{{ansible_all_ipv4_addresses[0]}}" "CPU:" "{{cpu_core.stdout}}" "MEM:" "{{mem_size.stdout}}" >> /tmp/wangyj/c1m2.txt
+      delegate_to: 10.30.5.193
+      when: cpu_core.stdout|int == 1 or mem_size.stdout|int <= 2097152
